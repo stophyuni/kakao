@@ -22,6 +22,7 @@ let conversation = new Conversation(config.conversation);
 
 let getConversationResponse = (message, context) => {
   let payload = {
+          console.log("getConversationResponse 처리됨");
     workspace_id: process.env.WORKSPACE_ID,
     context: context || {},
     input: message || {}
@@ -50,25 +51,25 @@ let postMessage = (req, res) => {
   });
 }
 
-/** 
+/**
 * 사용자의 메세지를 Watson Conversation 서비스에 전달하기 전에 처리할 코드
 * @param  {Object} user input
-*/ 
+*/
 let preProcess = payload => {
-  var inputText = payload.input.text; 
+  var inputText = payload.input.text;
   console.log("User Input : " + inputText);
-  console.log("Processed Input : " + inputText); 
+  console.log("Processed Input : " + inputText);
   console.log("--------------------------------------------------");
 
   return payload;
 }
 
-/** 
- * Watson Conversation 서비스의 응답을 사용자에게 전달하기 전에 처리할 코드 
- * @param  {Object} watson response 
- */ 
+/**
+ * Watson Conversation 서비스의 응답을 사용자에게 전달하기 전에 처리할 코드
+ * @param  {Object} watson response
+ */
 
-let postProcess = response => { 
+let postProcess = response => {
   console.log("Conversation Output : " + response.output.text);
   console.log("--------------------------------------------------");
   if(response.context && response.context.action){
@@ -77,11 +78,11 @@ let postProcess = response => {
   return response;
 }
 
-/** 
+/**
  * 대화 도중 Action을 수행할 필요가 있을 때 처리되는 함수
  * @param  {Object} data : response object
- * @param  {Object} action 
- */ 
+ * @param  {Object} action
+ */
 let doAction = (data, action) => {
   console.log("Action : " + action.command);
   switch(action.command){
@@ -97,11 +98,11 @@ let doAction = (data, action) => {
   return data;
 }
 
-/** 
+/**
  * 회의실의 예약 가능 여부를 체크하는 함수
  * @param  {Object} data : response object
- * @param  {Object} action 
- */ 
+ * @param  {Object} action
+ */
 let checkAvailability = (data, action) => {
    //TODO
    return data;

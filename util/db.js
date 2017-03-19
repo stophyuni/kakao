@@ -27,11 +27,12 @@ let cloudant = require('cloudant')({
 });
 
 cloudant.db.create(process.env.CLOUDANT_CONTEXT_DB, (err, res) => {
-    if (err) { 
+    if (err) {
         if (err.error == 'file_exists') {
+            console.log(err.error);
             console.log('cloudant db already exists');
         } else {
-            console.log('could not create db ', err);    
+            console.log('could not create db ', err);
         }
     }
     else {

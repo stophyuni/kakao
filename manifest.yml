@@ -3,17 +3,13 @@ declared-services:
   my-conversation-service:
     label: conversation
     plan: free
-  camomile-cloudantNoSQLDB:
-    label: cloudantNoSQLDB
-    plan: Lite
 applications:
-- name: meetingroom-reservation-with-camomile
+- name: meetingroom-jjh-camomile
   command: npm start
   path: .
   memory: 256M
   instances: 1
   services:
-  - Conversation-vp
-  - camomile-cloudantNoSQLDB
+  - Conversation-5f
   env:
     NPM_CONFIG_PRODUCTION: false
